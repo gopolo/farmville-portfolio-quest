@@ -1,96 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Farm-themed color palette */
+    --background: 45 30% 96%;
+    --foreground: 28 45% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 42 40% 94%;
+    --card-foreground: 28 45% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 42 40% 94%;
+    --popover-foreground: 28 45% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Earthy brown primary */
+    --primary: 28 65% 35%;
+    --primary-foreground: 45 30% 96%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Sky blue secondary */
+    --secondary: 199 85% 65%;
+    --secondary-foreground: 199 85% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Grass green muted */
+    --muted: 95 45% 85%;
+    --muted-foreground: 95 35% 30%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Golden harvest accent */
+    --accent: 42 90% 55%;
+    --accent-foreground: 28 45% 15%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Sunset destructive */
+    --destructive: 15 80% 55%;
+    --destructive-foreground: 45 30% 96%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 28 30% 75%;
+    --input: 28 30% 80%;
+    --ring: 95 55% 40%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Farm-specific colors */
+    --farm-grass: 95 55% 45%;
+    --farm-grass-light: 95 55% 60%;
+    --farm-soil: 28 55% 25%;
+    --farm-wood: 28 45% 40%;
+    --farm-wood-light: 32 40% 55%;
+    --farm-sky: 199 85% 70%;
+    --farm-sky-light: 199 85% 85%;
+    --farm-sun: 45 100% 60%;
+    --farm-barn: 0 70% 45%;
+    --farm-crop-green: 120 50% 40%;
+    --farm-crop-gold: 45 85% 55%;
+    --farm-water: 200 80% 60%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Sidebar colors */
+    --sidebar-background: 42 40% 94%;
+    --sidebar-foreground: 28 45% 20%;
+    --sidebar-primary: 28 65% 35%;
+    --sidebar-primary-foreground: 45 30% 96%;
+    --sidebar-accent: 95 45% 85%;
+    --sidebar-accent-foreground: 95 35% 25%;
+    --sidebar-border: 28 30% 75%;
+    --sidebar-ring: 95 55% 40%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 28 40% 8%;
+    --foreground: 45 30% 92%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 28 35% 12%;
+    --card-foreground: 45 30% 92%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 28 35% 12%;
+    --popover-foreground: 45 30% 92%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 42 80% 55%;
+    --primary-foreground: 28 40% 10%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 199 70% 45%;
+    --secondary-foreground: 199 85% 95%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 28 30% 20%;
+    --muted-foreground: 45 20% 70%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 45 85% 55%;
+    --accent-foreground: 28 40% 10%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 15 70% 45%;
+    --destructive-foreground: 45 30% 96%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 28 30% 25%;
+    --input: 28 30% 25%;
+    --ring: 42 80% 55%;
+
+    --sidebar-background: 28 35% 10%;
+    --sidebar-foreground: 45 30% 90%;
+    --sidebar-primary: 42 80% 55%;
+    --sidebar-primary-foreground: 28 40% 10%;
+    --sidebar-accent: 28 30% 18%;
+    --sidebar-accent-foreground: 45 30% 90%;
+    --sidebar-border: 28 30% 20%;
+    --sidebar-ring: 42 80% 55%;
   }
 }
 
@@ -100,6 +113,203 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  /* Wooden sign styles */
+  .wooden-sign {
+    @apply relative bg-gradient-to-b from-farm-wood-light to-farm-wood 
+           border-4 border-farm-soil rounded-lg shadow-xl;
+    box-shadow: 
+      inset 0 2px 4px rgba(255, 255, 255, 0.2),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.2),
+      0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  .wooden-sign::before {
+    content: '';
+    @apply absolute inset-0 opacity-20 rounded;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 8px,
+      rgba(0, 0, 0, 0.1) 8px,
+      rgba(0, 0, 0, 0.1) 10px
+    );
+  }
+
+  /* Farm plot card */
+  .farm-plot {
+    @apply relative bg-gradient-to-b from-farm-grass-light to-farm-grass 
+           rounded-2xl p-1 overflow-hidden;
+    box-shadow: 
+      inset 0 -4px 8px rgba(0, 0, 0, 0.15),
+      0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .farm-plot-inner {
+    @apply bg-gradient-to-b from-farm-soil/90 to-farm-soil 
+           rounded-xl p-4;
+  }
+
+  /* Crop growth animation */
+  .crop-grow {
+    animation: cropGrow 0.8s ease-out forwards;
+  }
+
+  /* Bounce animation for interactive elements */
+  .farm-bounce {
+    @apply transition-transform duration-200;
+  }
+
+  .farm-bounce:hover {
+    animation: farmBounce 0.4s ease-in-out;
+  }
+
+  /* Water splash effect */
+  .water-splash {
+    animation: waterSplash 0.6s ease-out forwards;
+  }
+
+  /* Floating animation */
+  .farm-float {
+    animation: farmFloat 3s ease-in-out infinite;
+  }
+
+  /* Sun glow effect */
+  .sun-glow {
+    @apply relative;
+  }
+
+  .sun-glow::after {
+    content: '';
+    @apply absolute inset-0 rounded-full opacity-50;
+    background: radial-gradient(circle, hsl(var(--farm-sun)) 0%, transparent 70%);
+    animation: sunPulse 2s ease-in-out infinite;
+  }
+
+  /* Game UI button */
+  .game-button {
+    @apply relative px-6 py-3 font-display font-bold text-lg
+           bg-gradient-to-b from-accent to-accent/80
+           border-4 border-farm-wood rounded-xl
+           shadow-lg transition-all duration-200
+           hover:-translate-y-1 hover:shadow-xl
+           active:translate-y-0 active:shadow-md;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .game-button::before {
+    content: '';
+    @apply absolute top-0 left-2 right-2 h-2 bg-white/30 rounded-full;
+  }
+
+  /* Ribbon banner */
+  .ribbon {
+    @apply relative bg-destructive text-destructive-foreground 
+           px-8 py-2 font-display font-bold;
+    clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+  }
+
+  /* Pixel-art inspired border */
+  .pixel-border {
+    box-shadow: 
+      4px 0 0 0 hsl(var(--farm-wood)),
+      -4px 0 0 0 hsl(var(--farm-wood)),
+      0 4px 0 0 hsl(var(--farm-wood)),
+      0 -4px 0 0 hsl(var(--farm-wood));
+  }
+}
+
+@layer utilities {
+  .text-shadow-game {
+    text-shadow: 
+      2px 2px 0 hsl(var(--farm-soil)),
+      -1px -1px 0 hsl(var(--farm-soil)),
+      1px -1px 0 hsl(var(--farm-soil)),
+      -1px 1px 0 hsl(var(--farm-soil));
+  }
+
+  .text-shadow-light {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@keyframes cropGrow {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scaleY(1.1);
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes farmBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-8px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+  75% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes waterSplash {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes farmFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes sunPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.3;
+  }
+}
+
+@keyframes wiggle {
+  0%, 100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+.animate-wiggle {
+  animation: wiggle 0.5s ease-in-out;
 }
