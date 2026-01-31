@@ -313,3 +313,22 @@
 .animate-wiggle {
   animation: wiggle 0.5s ease-in-out;
 }
+
+/* Farm animal walking animations */
+@keyframes walk-right {
+  0% {
+    left: -10%;
+  }
+  100% {
+    left: 110%;
+  }
+}
+
+@keyframes walk-left {
+  0% {
+    left: 110%;
+  }
+  100% {
+    left: -10%;
+  }
+}
