@@ -7,14 +7,13 @@ import { ChevronDown } from "lucide-react";
 export const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
-      {/* Background Image */}
+      {/* Background Image with blur for text readability */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-sm scale-105"
         style={{ backgroundImage: `url(${farmHeroBg})` }}
-      >
-        {/* Overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-farm-soil/80 via-transparent to-farm-sky/30" />
-      </div>
+      />
+      {/* Overlay for enhanced readability */}
+      <div className="absolute inset-0 bg-gradient-to-t from-farm-soil/90 via-farm-soil/40 to-farm-sky/50" />
 
       {/* Content */}
       <div className="relative z-10 text-center px-4 pt-20">
