@@ -4,106 +4,108 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Accessible font loading with fallbacks */
+
 @layer base {
   :root {
-    /* Farm-themed color palette */
-    --background: 45 30% 96%;
-    --foreground: 28 45% 15%;
+    /* Accessible Farm-themed color palette - WCAG AA compliant */
+    --background: 45 25% 97%;
+    --foreground: 25 50% 12%;
 
-    --card: 42 40% 94%;
-    --card-foreground: 28 45% 15%;
+    --card: 42 35% 95%;
+    --card-foreground: 25 50% 12%;
 
-    --popover: 42 40% 94%;
-    --popover-foreground: 28 45% 15%;
+    --popover: 42 35% 95%;
+    --popover-foreground: 25 50% 12%;
 
-    /* Earthy brown primary */
-    --primary: 28 65% 35%;
-    --primary-foreground: 45 30% 96%;
+    /* Earthy brown primary - darkened for better contrast */
+    --primary: 25 70% 28%;
+    --primary-foreground: 45 30% 98%;
 
-    /* Sky blue secondary */
-    --secondary: 199 85% 65%;
-    --secondary-foreground: 199 85% 15%;
+    /* Sky blue secondary - darkened for readability */
+    --secondary: 200 75% 35%;
+    --secondary-foreground: 200 90% 98%;
 
-    /* Grass green muted */
-    --muted: 95 45% 85%;
-    --muted-foreground: 95 35% 30%;
+    /* Grass green muted - improved contrast */
+    --muted: 95 35% 88%;
+    --muted-foreground: 95 45% 25%;
 
-    /* Golden harvest accent */
-    --accent: 42 90% 55%;
-    --accent-foreground: 28 45% 15%;
+    /* Golden harvest accent - darkened for text readability */
+    --accent: 38 85% 42%;
+    --accent-foreground: 25 50% 12%;
 
-    /* Sunset destructive */
-    --destructive: 15 80% 55%;
-    --destructive-foreground: 45 30% 96%;
+    /* Sunset destructive - WCAG compliant */
+    --destructive: 0 75% 42%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 28 30% 75%;
-    --input: 28 30% 80%;
-    --ring: 95 55% 40%;
+    --border: 25 25% 70%;
+    --input: 25 25% 85%;
+    --ring: 95 50% 35%;
 
     --radius: 0.75rem;
 
-    /* Farm-specific colors */
-    --farm-grass: 95 55% 45%;
-    --farm-grass-light: 95 55% 60%;
-    --farm-soil: 28 55% 25%;
-    --farm-wood: 28 45% 40%;
-    --farm-wood-light: 32 40% 55%;
-    --farm-sky: 199 85% 70%;
-    --farm-sky-light: 199 85% 85%;
-    --farm-sun: 45 100% 60%;
-    --farm-barn: 0 70% 45%;
-    --farm-crop-green: 120 50% 40%;
-    --farm-crop-gold: 45 85% 55%;
-    --farm-water: 200 80% 60%;
+    /* Farm-specific colors - improved contrast */
+    --farm-grass: 95 50% 38%;
+    --farm-grass-light: 95 45% 55%;
+    --farm-soil: 25 55% 22%;
+    --farm-wood: 25 45% 35%;
+    --farm-wood-light: 30 38% 48%;
+    --farm-sky: 200 75% 55%;
+    --farm-sky-light: 200 70% 75%;
+    --farm-sun: 42 95% 50%;
+    --farm-barn: 0 65% 40%;
+    --farm-crop-green: 120 45% 35%;
+    --farm-crop-gold: 42 80% 48%;
+    --farm-water: 200 70% 50%;
 
     /* Sidebar colors */
-    --sidebar-background: 42 40% 94%;
-    --sidebar-foreground: 28 45% 20%;
-    --sidebar-primary: 28 65% 35%;
-    --sidebar-primary-foreground: 45 30% 96%;
-    --sidebar-accent: 95 45% 85%;
-    --sidebar-accent-foreground: 95 35% 25%;
-    --sidebar-border: 28 30% 75%;
-    --sidebar-ring: 95 55% 40%;
+    --sidebar-background: 42 35% 95%;
+    --sidebar-foreground: 25 50% 15%;
+    --sidebar-primary: 25 70% 28%;
+    --sidebar-primary-foreground: 45 30% 98%;
+    --sidebar-accent: 95 35% 88%;
+    --sidebar-accent-foreground: 95 45% 20%;
+    --sidebar-border: 25 25% 70%;
+    --sidebar-ring: 95 50% 35%;
   }
 
   .dark {
-    --background: 28 40% 8%;
-    --foreground: 45 30% 92%;
+    --background: 25 35% 10%;
+    --foreground: 45 25% 92%;
 
-    --card: 28 35% 12%;
-    --card-foreground: 45 30% 92%;
+    --card: 25 30% 14%;
+    --card-foreground: 45 25% 92%;
 
-    --popover: 28 35% 12%;
-    --popover-foreground: 45 30% 92%;
+    --popover: 25 30% 14%;
+    --popover-foreground: 45 25% 92%;
 
-    --primary: 42 80% 55%;
-    --primary-foreground: 28 40% 10%;
+    --primary: 42 75% 55%;
+    --primary-foreground: 25 35% 10%;
 
-    --secondary: 199 70% 45%;
-    --secondary-foreground: 199 85% 95%;
+    --secondary: 200 65% 50%;
+    --secondary-foreground: 200 90% 98%;
 
-    --muted: 28 30% 20%;
-    --muted-foreground: 45 20% 70%;
+    --muted: 25 25% 22%;
+    --muted-foreground: 45 18% 75%;
 
-    --accent: 45 85% 55%;
-    --accent-foreground: 28 40% 10%;
+    --accent: 42 80% 52%;
+    --accent-foreground: 25 35% 10%;
 
-    --destructive: 15 70% 45%;
-    --destructive-foreground: 45 30% 96%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 28 30% 25%;
-    --input: 28 30% 25%;
-    --ring: 42 80% 55%;
+    --border: 25 25% 28%;
+    --input: 25 25% 28%;
+    --ring: 42 75% 55%;
 
-    --sidebar-background: 28 35% 10%;
-    --sidebar-foreground: 45 30% 90%;
-    --sidebar-primary: 42 80% 55%;
-    --sidebar-primary-foreground: 28 40% 10%;
-    --sidebar-accent: 28 30% 18%;
-    --sidebar-accent-foreground: 45 30% 90%;
-    --sidebar-border: 28 30% 20%;
-    --sidebar-ring: 42 80% 55%;
+    --sidebar-background: 25 30% 12%;
+    --sidebar-foreground: 45 25% 92%;
+    --sidebar-primary: 42 75% 55%;
+    --sidebar-primary-foreground: 25 35% 10%;
+    --sidebar-accent: 25 25% 20%;
+    --sidebar-accent-foreground: 45 25% 92%;
+    --sidebar-border: 25 25% 24%;
+    --sidebar-ring: 42 75% 55%;
   }
 }
 
@@ -112,12 +114,32 @@
     @apply border-border;
   }
 
+  html {
+    /* Ensure readable base font size */
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   body {
     @apply bg-background text-foreground font-body;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display;
+    @apply font-display font-semibold;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+  }
+
+  p {
+    line-height: 1.7;
+  }
+
+  /* Ensure focus states are visible for keyboard navigation */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-ring;
   }
 }
 
