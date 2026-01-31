@@ -6,10 +6,12 @@ import { TechStackSection } from "@/components/farm/TechStackSection";
 import { ContactSection } from "@/components/farm/ContactSection";
 import { AppreciationSection } from "@/components/farm/AppreciationSection";
 import { FooterSection } from "@/components/farm/FooterSection";
+import { FarmAnimals } from "@/components/farm/FarmAnimals";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
+      <FarmAnimals />
       <NavigationBar />
       <main>
         <HeroSection />

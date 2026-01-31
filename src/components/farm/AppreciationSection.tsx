@@ -1,30 +1,89 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { WoodenSign } from "./WoodenSign";
 import { cn } from "@/lib/utils";
-import { Heart, Sparkles, Star, ThumbsUp, Droplets } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const appreciationItems = [
-  { icon: "❤️", label: "Love it!", count: 42, color: "from-red-400 to-red-600" },
-  { icon: "⭐", label: "Amazing!", count: 38, color: "from-yellow-400 to-amber-500" },
-  { icon: "🌟", label: "Stellar!", count: 27, color: "from-purple-400 to-purple-600" },
-  { icon: "🔥", label: "On Fire!", count: 31, color: "from-orange-400 to-red-500" },
-  { icon: "💧", label: "Refreshing!", count: 24, color: "from-cyan-400 to-blue-500" },
+  { icon: "❤️", label: "Love it!", type: "love", color: "from-red-400 to-red-600" },
+  { icon: "⭐", label: "Amazing!", type: "amazing", color: "from-yellow-400 to-amber-500" },
+  { icon: "🌟", label: "Stellar!", type: "stellar", color: "from-purple-400 to-purple-600" },
+  { icon: "🔥", label: "On Fire!", type: "fire", color: "from-orange-400 to-red-500" },
+  { icon: "💧", label: "Refreshing!", type: "refreshing", color: "from-cyan-400 to-blue-500" },
 ];
 
 export const AppreciationSection = () => {
-  const [counts, setCounts] = useState(appreciationItems.map((item) => item.count));
+  const [counts, setCounts] = useState<Record<string, number>>({});
   const [clickedIndex, setClickedIndex] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const handleAppreciate = (index: number) => {
-    const newCounts = [...counts];
-    newCounts[index] += 1;
-    setCounts(newCounts);
+  // Fetch initial counts from database
+  useEffect(() => {
+    const fetchCounts = async () => {
+      const { data, error } = await supabase
+        .from("appreciations")
+        .select("reaction_type, count");
+      
+      if (data) {
+        const countsMap: Record<string, number> = {};
+        data.forEach((item) => {
+          countsMap[item.reaction_type] = item.count;
+        });
+        setCounts(countsMap);
+      }
+      setIsLoading(false);
+    };
+
+    fetchCounts();
+
+    // Subscribe to realtime updates
+    const channel = supabase
+      .channel("appreciations")
+      .on(
+        "postgres_changes",
+        { event: "UPDATE", schema: "public", table: "appreciations" },
+        (payload) => {
+          const updated = payload.new as { reaction_type: string; count: number };
+          setCounts((prev) => ({
+            ...prev,
+            [updated.reaction_type]: updated.count,
+          }));
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
+  const handleAppreciate = async (index: number) => {
+    const item = appreciationItems[index];
     setClickedIndex(index);
 
-    toast.success(`Thanks for the ${appreciationItems[index].label} 🌻`, {
-      description: "Your appreciation helps the farm grow!",
+    // Optimistic update
+    setCounts((prev) => ({
+      ...prev,
+      [item.type]: (prev[item.type] || 0) + 1,
+    }));
+
+    // Call the database function to increment
+    const { error } = await supabase.rpc("increment_appreciation", {
+      reaction: item.type,
     });
+
+    if (error) {
+      console.error("Error incrementing appreciation:", error);
+      // Revert optimistic update on error
+      setCounts((prev) => ({
+        ...prev,
+        [item.type]: (prev[item.type] || 1) - 1,
+      }));
+    } else {
+      toast.success(`Thanks for the ${item.label} 🌻`, {
+        description: "Your appreciation helps the farm grow!",
+      });
+    }
 
     setTimeout(() => setClickedIndex(null), 500);
   };
@@ -48,11 +107,13 @@ export const AppreciationSection = () => {
             <button
               key={item.label}
               onClick={() => handleAppreciate(index)}
+              disabled={isLoading}
               className={cn(
                 "relative flex flex-col items-center gap-2 p-4 rounded-2xl",
                 "bg-gradient-to-br border-4 border-farm-wood/50",
                 "transition-all duration-300 hover:scale-110 hover:-translate-y-1",
                 "active:scale-95 shadow-lg hover:shadow-xl",
+                "disabled:opacity-50 disabled:cursor-not-allowed",
                 item.color,
                 clickedIndex === index && "animate-wiggle"
               )}
@@ -62,7 +123,7 @@ export const AppreciationSection = () => {
                 {item.label}
               </span>
               <span className="absolute -top-2 -right-2 bg-white text-foreground font-bold text-xs px-2 py-1 rounded-full shadow-md">
-                {counts[index]}
+                {isLoading ? "..." : counts[item.type] || 0}
               </span>
             </button>
           ))}

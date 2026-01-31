@@ -1,27 +1,37 @@
 import { useState } from "react";
 import { WoodenSign } from "./WoodenSign";
 import { GameButton } from "./GameButton";
-import { Mail, Linkedin, Send, CheckCircle } from "lucide-react";
+import { Mail, Linkedin, Send } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 export const ContactSection = () => {
   const [message, setMessage] = useState("");
   const [name, setName] = useState("");
   const [isSending, setIsSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSending(true);
     
-    // Simulate sending
-    setTimeout(() => {
+    const { error } = await supabase
+      .from("contacts")
+      .insert({ name: name.trim(), message: message.trim() });
+
+    if (error) {
+      console.error("Error submitting contact:", error);
+      toast.error("Oops! Something went wrong 🌧️", {
+        description: "Please try again later.",
+      });
+    } else {
       toast.success("Message sent to the farmer! 🌻", {
         description: "Shailesh will get back to you soon!",
       });
       setMessage("");
       setName("");
-      setIsSending(false);
-    }, 1000);
+    }
+    
+    setIsSending(false);
   };
 
   return (
