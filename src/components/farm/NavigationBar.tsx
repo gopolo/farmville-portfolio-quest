@@ -22,7 +22,7 @@ export const NavigationBar = () => {
             className="font-display font-bold text-2xl text-farm-wood flex items-center gap-2"
           >
             <span className="text-3xl">🌻</span>
-            <span className="text-shadow-light">SG Farm</span>
+            <span className="text-shadow-light">Shailesh's Skills Farm</span>
           </a>
 
           {/* Desktop Nav */}
