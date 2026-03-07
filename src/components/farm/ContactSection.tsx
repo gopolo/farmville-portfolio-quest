@@ -92,6 +92,7 @@ export const ContactSection = () => {
                       <textarea
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
+                        maxLength={2000}
                         className="w-full px-4 py-2 rounded-lg border-2 border-border bg-background focus:border-accent focus:outline-none transition-colors font-medium resize-none"
                         rows={4}
                         placeholder="Write your message..."
