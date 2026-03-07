@@ -81,6 +81,7 @@ export const ContactSection = () => {
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
+                        maxLength={100}
                         className="w-full px-4 py-2 rounded-lg border-2 border-border bg-background focus:border-accent focus:outline-none transition-colors font-medium"
                         placeholder="Enter your name..."
                         required
