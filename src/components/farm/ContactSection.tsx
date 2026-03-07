@@ -10,8 +10,24 @@ export const ContactSection = () => {
   const [name, setName] = useState("");
   const [isSending, setIsSending] = useState(false);
 
+  const validateInputs = () => {
+    const trimmedName = name.trim();
+    const trimmedMessage = message.trim();
+
+    if (trimmedName.length < 2 || trimmedName.length > 100) {
+      toast.error("Name must be between 2 and 100 characters");
+      return false;
+    }
+    if (trimmedMessage.length < 10 || trimmedMessage.length > 2000) {
+      toast.error("Message must be between 10 and 2000 characters");
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!validateInputs()) return;
     setIsSending(true);
     
     const { error } = await supabase
@@ -19,7 +35,6 @@ export const ContactSection = () => {
       .insert({ name: name.trim(), message: message.trim() });
 
     if (error) {
-      console.error("Error submitting contact:", error);
       toast.error("Oops! Something went wrong 🌧️", {
         description: "Please try again later.",
       });
@@ -66,6 +81,7 @@ export const ContactSection = () => {
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
+                        maxLength={100}
                         className="w-full px-4 py-2 rounded-lg border-2 border-border bg-background focus:border-accent focus:outline-none transition-colors font-medium"
                         placeholder="Enter your name..."
                         required
@@ -76,6 +92,7 @@ export const ContactSection = () => {
                       <textarea
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
+                        maxLength={2000}
                         className="w-full px-4 py-2 rounded-lg border-2 border-border bg-background focus:border-accent focus:outline-none transition-colors font-medium resize-none"
                         rows={4}
                         placeholder="Write your message..."
