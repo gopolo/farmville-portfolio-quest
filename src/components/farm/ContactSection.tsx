@@ -10,8 +10,24 @@ export const ContactSection = () => {
   const [name, setName] = useState("");
   const [isSending, setIsSending] = useState(false);
 
+  const validateInputs = () => {
+    const trimmedName = name.trim();
+    const trimmedMessage = message.trim();
+
+    if (trimmedName.length < 2 || trimmedName.length > 100) {
+      toast.error("Name must be between 2 and 100 characters");
+      return false;
+    }
+    if (trimmedMessage.length < 10 || trimmedMessage.length > 2000) {
+      toast.error("Message must be between 10 and 2000 characters");
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!validateInputs()) return;
     setIsSending(true);
     
     const { error } = await supabase
@@ -19,7 +35,6 @@ export const ContactSection = () => {
       .insert({ name: name.trim(), message: message.trim() });
 
     if (error) {
-      console.error("Error submitting contact:", error);
       toast.error("Oops! Something went wrong 🌧️", {
         description: "Please try again later.",
       });
