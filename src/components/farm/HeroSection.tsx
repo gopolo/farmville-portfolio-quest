@@ -20,7 +20,7 @@ export const HeroSection = () => {
         {/* Main Sign */}
         <WoodenSign size="lg" className="mb-8 inline-block">
           <h1 className="font-display text-4xl md:text-6xl font-bold text-shadow-game">
-            SHAILESH GURAV
+            SHAILESH GURAV — E-Learning Solutions Expert
           </h1>
           <p className="text-lg md:text-xl mt-2 text-accent font-semibold">
             ✨ Full-Stack E-Learning Solutions Expert ✨
