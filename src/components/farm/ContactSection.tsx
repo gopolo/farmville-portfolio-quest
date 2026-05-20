@@ -76,8 +76,10 @@ export const ContactSection = () => {
                   </h3>
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                      <label className="block font-medium text-sm mb-1">Your Name</label>
+                      <label htmlFor="contact-name" className="block font-medium text-sm mb-1">Your Name</label>
                       <input
+                        id="contact-name"
+                        name="name"
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
@@ -88,8 +90,10 @@ export const ContactSection = () => {
                       />
                     </div>
                     <div>
-                      <label className="block font-medium text-sm mb-1">Message</label>
+                      <label htmlFor="contact-message" className="block font-medium text-sm mb-1">Message</label>
                       <textarea
+                        id="contact-message"
+                        name="message"
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         maxLength={2000}
